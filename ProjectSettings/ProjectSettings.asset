@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Piterskov
   productName: BombardiroCrocodilo
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -919,7 +919,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 1
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: c5215a47-3989-47a4-b744-177f47103870
   framebufferDepthMemorylessMode: 0
