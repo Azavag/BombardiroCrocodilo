@@ -120,7 +120,9 @@ namespace ECM.Controllers
         private bool _rootMotionRotation;
 
         [SerializeField]
-        Transform cameraTransform;
+        private bool _isCameraMovement;
+        [SerializeField] 
+        private Transform cameraTransform;
 
         #endregion
 
@@ -873,10 +875,13 @@ namespace ECM.Controllers
                 z = Input.GetAxisRaw("Vertical")
             };
             
-
-            Vector3 forward = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
-            Vector3 right = Vector3.Cross(transform.up, forward);
-            moveDirection = moveDirection.x * right + moveDirection.z * forward;
+            if(_isCameraMovement)
+            {
+                Vector3 forward = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
+                Vector3 right = Vector3.Cross(transform.up, forward);
+                moveDirection = moveDirection.x * right + moveDirection.z * forward;
+            }
+          
 
             jump = Input.GetButton("Jump");
 
