@@ -1,0 +1,39 @@
+name: Unity Build
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Get tag
+        shell: pwsh
+        run: |
+          $tagName = $env:GITHUB_REF -replace '^refs/tags/', ''
+          "TAG_NAME=$tagName" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Unity
+        uses: buildalon/unity-setup@v1
+        with:
+          unity-version: 6000.1.14f1
+          build-targets: StandaloneWindows64
+      - name: Activate Unity
+        uses: buildalon/activate-unity-license@v1
+        with:
+          license: 'Personal'
+          username: '${{ secrets.UNITY_USERNAME }}'
+          password: '${{ secrets.UNITY_PASSWORD }}' 
+      - name: Build project
+        uses: buildalon/unity-action@v1
+        with:
+          build-target: StandaloneWindows64
+          log-name: StandaloneWindows64-${{ env.TAG_NAME }}
+          project-path: '.'	
+          args: '-quit -batchmode -executeMethod BuildScript.BuildGame'
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-${{ env.TAG_NAME }}
+          path: Builds/

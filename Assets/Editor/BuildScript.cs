@@ -6,7 +6,7 @@ public class BuildScript
     public static void BuildGame()
     {
         string[] scenes = { "Assets/Scenes/SampleScene.unity" };
-        string buildPath = "D:/Build";
+        string buildPath = "Builds/game.exe";
 
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         buildPlayerOptions.scenes = scenes;
